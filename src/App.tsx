@@ -1,26 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import { Col, Row } from "antd";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import VerticalList from "./VerticalList";
+import HorizontalList from "./HorizontalList";
+import MultiDrag from "./MultiDrag";
+
+const App: React.FC = () => (
+  <main className="p-8">
+    <Row className="p-3 bg-slate-100 mb-5">
+      <Col span={9} className="p-3 bg-blue-500">
+        <VerticalList />
+      </Col>
+      <Col span={14} offset={1} className="p-3 bg-blue-200">
+        <HorizontalList />
+      </Col>
+    </Row>
+    <Row className="p-3 bg-slate-100">
+      <Col span={24} className="p-3 bg-blue-200">
+        <MultiDrag />
+      </Col>
+    </Row>
+  </main>
+);
 
 export default App;
