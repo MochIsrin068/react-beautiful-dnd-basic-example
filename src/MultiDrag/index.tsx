@@ -15,7 +15,7 @@ const { Title } = Typography;
 
 interface IItem {
   id: string;
-  content: string;
+  content: string | any;
 }
 
 interface IMoveResult {
@@ -29,7 +29,14 @@ const MultiDrag = () => {
 
   const getItems = (count: number, offset: number = 0): IItem[] => {
     return Array.from({ length: count }, (v, k) => k).map((k) => ({
-      content: `Task ${k + offset + 1}`,
+      content: (
+        <div>
+          <span>{`Task ${k + offset + 1}`}</span>
+          <p className="mt-1 italic text-gray-500">{`Description of Task ${
+            k + offset + 1
+          }`}</p>
+        </div>
+      ),
       id: `task-${k + offset}`,
     }));
   };
@@ -74,15 +81,17 @@ const MultiDrag = () => {
     userSelect: "none",
     padding: 2 * grid,
     margin: `0 0 ${grid}px 0`,
-    background: isDragging ? "lightgreen" : "grey",
+    background: isDragging ? "lightgreen" : "#e2e2e2",
+    borderRadius: 4,
     ...draggableStyle,
   });
 
   const getListStyle = (isDraggingOver: boolean): {} => ({
-    background: isDraggingOver ? "lightblue" : "lightgrey",
+    background: isDraggingOver ? "lightblue" : "#f4f5f7",
     padding: grid,
     width: 300,
     minHeight: 400,
+    borderRadius: 4,
   });
 
   const getList = (id: string): IItem[] => {
@@ -132,7 +141,9 @@ const MultiDrag = () => {
 
   return (
     <>
-      <Title level={4}>Multi Drag</Title>
+      <Title level={4} className="!text-white italic">
+        Multi Drag
+      </Title>
       <Divider className="my-4 bg-white" />
       <DragDropContext onDragEnd={onDragEnd}>
         <div className="flex">
@@ -147,7 +158,7 @@ const MultiDrag = () => {
                   {...provided.droppableProps}
                   style={getListStyle(snapshot.isDraggingOver)}
                 >
-                  <p className="mb-3 font-bold pb-2 border-b border-white">
+                  <p className="mb-3 font-bold pb-2 border-b-2 border-gray-200">
                     Todos
                   </p>
                   {items.map((item: any, index: number) => (
@@ -191,7 +202,7 @@ const MultiDrag = () => {
                 ref={providedDroppable2.innerRef}
                 style={getListStyle(snapshotDroppable2.isDraggingOver)}
               >
-                <p className="mb-3 font-bold pb-2 border-b border-white">
+                <p className="mb-3 font-bold pb-2 border-b-2 border-gray-200">
                   Done
                 </p>
                 {selected.map((item: any, index: number) => (

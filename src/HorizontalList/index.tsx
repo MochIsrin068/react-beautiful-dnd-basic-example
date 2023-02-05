@@ -32,18 +32,21 @@ const HorizontalList = () => {
     margin: `0 ${grid}px 0 0`,
 
     // change background colour if dragging
-    background: isDragging ? "lightgreen" : "grey",
+    background: isDragging ? "lightgreen" : "#e2e2e2",
+
+    borderRadius: 4,
 
     // styles we need to apply on draggables
     ...draggableStyle,
   });
 
   const getListStyle = (isDraggingOver: boolean) => ({
-    background: isDraggingOver ? "lightblue" : "lightgrey",
+    background: isDraggingOver ? "lightblue" : "#f4f5f7",
     display: "flex",
     padding: grid,
     overflow: "auto",
     height: "80%",
+    borderRadius: 4,
   });
 
   const onDragEnd = (result: any) => {
@@ -70,7 +73,9 @@ const HorizontalList = () => {
 
   return (
     <>
-      <Title level={4}>Horizontal List</Title>
+      <Title level={4} className="!text-white italic">
+        Horizontal List
+      </Title>
       <Divider className="my-4 bg-white" />
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId="droppable" direction="horizontal">
@@ -91,9 +96,15 @@ const HorizontalList = () => {
                         snapshot.isDragging,
                         provided.draggableProps.style
                       )}
-                      className="flex justify-center items-center text-center"
+                      className="flex justify-center items-center text-center italic"
                     >
-                      {item.content}
+                      <div className="text-left">
+                        {item.content}
+                        <p className="text-gray-500 mt-1">
+                          Lorem ipsum dolor sit amet consectetur adipisicing
+                          elit.
+                        </p>
+                      </div>
                     </div>
                   )}
                 </Draggable>

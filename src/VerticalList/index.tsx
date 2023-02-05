@@ -32,16 +32,17 @@ const VerticalList = () => {
     margin: `0 0 ${grid}px 0`,
 
     // change background colour if dragging
-    background: isDragging ? "lightgreen" : "grey",
+    background: isDragging ? "lightgreen" : "#e2e2e2",
+    borderRadius: 4,
 
     // styles we need to apply on draggables
     ...draggableStyle,
   });
 
   const getListStyle = (isDraggingOver: boolean) => ({
-    background: isDraggingOver ? "lightblue" : "lightgrey",
+    background: isDraggingOver ? "lightblue" : "#f4f5f7",
     padding: grid,
-    // width: 250,
+    borderRadius: 4,
   });
 
   const onDragEnd = (result: any) => {
@@ -68,7 +69,9 @@ const VerticalList = () => {
 
   return (
     <>
-      <Title level={4}>Vertical List</Title>
+      <Title level={4} className="!text-white italic">
+        Vertical List
+      </Title>
       <Divider className="my-4 bg-white" />
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId="droppable">
@@ -89,8 +92,12 @@ const VerticalList = () => {
                         snapshot.isDragging,
                         provided.draggableProps.style
                       )}
+                      className="italic"
                     >
                       {item.content}
+                      <p className="text-gray-500">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      </p>
                     </div>
                   )}
                 </Draggable>
